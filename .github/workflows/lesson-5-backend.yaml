@@ -7,11 +7,11 @@ branches:
 
 jobs:
 security_test:
+name: Execute the PyCharm security test
 runs-on: ubuntu-latest
 defaults:
 run:
 working-directory: backend
-name: Execute the PyCharm security test
 steps:
 - uses: actions/checkout@v4
 - name: Run PyCharm Security
@@ -27,18 +27,23 @@ run:
 working-directory: backend
 steps:
 - uses: actions/checkout@v4
-- name: Set up Python 3.10
-uses: actions/setup-python@v5
-with:
-python-version: "3.10"
-- name: Install dependencies
-run: |
-python -m pip install --upgrade pip
-pip install pytest django_mock_queries six coverage
-- name: Unit Tests
-run: |
-coverage run -m --source=./hangry_api pytest
-coverage report
+
+```
+  - name: Set up Python 3.10
+    uses: actions/setup-python@v5
+    with:
+      python-version: "3.10"
+
+  - name: Install dependencies
+    run: |
+      python -m pip install --upgrade pip
+      pip install pytest django_mock_queries six coverage
+
+  - name: Unit Tests
+    run: |
+      coverage run -m --source=./hangry_api pytest
+      coverage report
+```
 
 deploy:
 needs: [build_and_test]
@@ -48,7 +53,11 @@ run:
 working-directory: backend
 steps:
 - uses: actions/checkout@v4
-- name: Generate deployment package
-run: zip -r deploy.zip . -x '*.git*'
-- name: '**PLACEHOLDER** Deploy to Elastic Beanstalk'
-run: echo Placeholder for Deployment
+
+```
+  - name: Generate deployment package
+    run: zip -r deploy.zip . -x '*.git*'
+
+  - name: '**PLACEHOLDER** Deploy to Elastic Beanstalk'
+    run: echo Placeholder for Deployment
+```
